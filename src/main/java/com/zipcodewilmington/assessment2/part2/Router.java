@@ -2,36 +2,42 @@ package com.zipcodewilmington.assessment2.part2;
 
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.LinkedHashMap;
 
 public class Router {
-    private Map<String, String> map = new TreeMap<>();
+    private Map<String, String> list = new LinkedHashMap<>();
 
 
     public void add(String path, String controller) {
-        map.put(path, controller);
+        list.put(path, controller);
     }
 
     public Integer size() {
 
-        return map.size();
+        return list.size();
     }
 
     public String getController(String path) {
 
-        return map.get(path);
+        return list.get(path);
     }
 
     public void update(String path, String studentController) {
-        map.put(path, studentController);
+        list.replace(path, studentController);
     }
 
     public void remove(String path) {
-        map.remove(path);
+        list.remove(path);
     }
 
 
-    public String toString() {
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
 
-        return getClass().getName() + "@" + Integer.toHexString(hashCode());
-}
+        for(String s : list.keySet()){
+            sb.append(s).append(list.get(s)).append("\n");
+        }
+        return sb.toString();
+    }
 }
